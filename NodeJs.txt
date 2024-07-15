@@ -1,0 +1,353 @@
+CHAPTER - 1 
+what is nodejs ?
+nodejs ek run time environment h javascript ke liye , js ko agar appne seedhe os m run karne ka ho to nodejs ka use karne ka hota h 
+asynchronous hota h ye 
+non blocking I/O
+
+node = js ko run karta h system m = node <file_name>
+nodejs webserver nhi h par agar hum express use kaare to hum webserver bana skte h 
+
+why node webserver 
+heavy I/O 
+small code footprint
+
+node js m sab cheeze async use karne ka try kaare kyuki server both saari request ko serve karne wala hota h
+
+koi bhi js waali file ko run karna ho to node <fileName>
+
+modules ?
+they are basically the containers 
+type of modules 
+commonJs (require wala)
+ESmodules (import export wala ) 
+node m haar file ko ek module bolte h 
+famous modules h 
+Http 
+streams 
+Os
+FileSystem
+
+package.json ?
+node ko manage karne ke liye use karte h hum package.json koun koun se kya kya packages use kiya h vo sab define hote h usmai
+
+making package json from scratch 
+npm init => to iske baad package.json create hogaa
+phir name of the package 
+version 
+description 
+entry point kounsi file se app enter karogye
+test command 
+git repo 
+keywords 
+author
+
+npm install
+
+dependencies : jo project m chhaiye hoti h 
+dev dependencies : esi dependencies jo dev environment m chhaiye development environment m chhaiye na ki code baana m chhaiye
+
+agar kuch globally install karna ka h pc m to : 
+npm install --global karke karte h 
+
+agar kuch bhi dev dependency m install karna ho to : 
+npm i -D <package_name>
+
+3 signs hote h 
+^ koi dependcies ko update karne ke liye 4.18 to 4.19 hona like that
+* major update karne ke liye 4 to 5 ho jana 
+~ kuch Chhota mota update hona 4.18.2 ka 4.18.5 like that
+
+to check the outdated packages : 
+npm outdated
+
+to update the packages : 
+npm update
+
+to uninstall the packages : 
+npm uninstall <package-name>
+
+scripts inside package.json can be used like npm run <script-name> e.g npm run dev
+
+agar humko default package chhaiye hota h to hum : npm init -y use karte h 
+
+nodemon is a package for running node server and track live changes to re-start again.
+
+chapter 2 webservers using nodejs
+
+client server architecture 
+req = request 
+res = response 
+
+http format for req
+get post put patch delete methods 
+request header 
+body m data
+
+http format for response 
+status line 
+response header 
+body m response 
+
+response status 
+2XX = success 
+3XX = redirection 
+4XX = client error 
+5XX = server error
+
+npm init -y to go with default options 
+
+go with the format only req res
+
+sever ek thara ka callback hota h yaa function bol do jo haar baar ek baar request aane p chalta h   
+
+hum chhaiye to server node js ki help se bana skte h jo http moduel use karta h lekin hum express ki help se banate h kyuki node.js m both sara boiler plate code chhaiye hota h sirf node js se routing aur sab karna both difficult h 
+
+express kya h nodejs webapplication ka framework h 
+
+express isslye use karte h kyuki 
+routing easy kar deta h 
+middleware easily use kar skte h 
+error handling easily hoti h 
+static files and extensiblity h express use karne m isslye 
+
+While you can create a server using Node.js alone, Express.js simplifies the process and provides many useful features out of the box, making it the preferred choice for building web applications and APIs with Node.js.
+
+
+chapter -3 express 
+vo ek defacto h defacto means ke default to nhi h leekin appne bydefault hum node ke saath hum ye hi use karte h 
+
+to use it : install npm i express current version 5.0 beta documentation 
+
+const express = require("express")
+const server = express();
+
+server.listen(8080,()=>{
+console.log("server started listing to port 8080");
+});
+
+
+ek hi path p alag alag method call ho skti h 
+
+API - ENDPOINTS - ROUTE
+
+MIDDLEWARE 
+REQUEST JO BHI AATI VO CHECK KARTA H KI USER AUTHENTICATED H KE NHI H 
+middleware m next() use hota h taki request aagye jaa ske  
+
+application level middleware 
+jo pure application m lagta h 
+
+route level middleware 
+jo sirf router p lagta h middleware 
+
+jo query hota h vo direct object m bann jata h 
+
+express req ki body ko directly nhi padhta h agar usko body ko padhana ho to appne ko use karna padta h express.json()
+
+
+basically data 3 tarike se pass hote h 
+query parameter m se url?name="parth"
+body m se password and all that 
+params url/:id
+
+
+CHAPTER -4 REST API USING EXPRESS JS
+
+REST 
+CREATE = POST = DATA IN REQUEST BODY    = /STUDENTS 
+READ   = GET  = FIND DATA IN URL PARAMS = /STUDENTS/:ID
+READ   = GET  = NO DATA                 = /STUDENTS 
+UPDATE = PUT  = FIND DATA IN URL PARAMS 
+		UPDATE DATA IN REQ BODY = /STUDENTS/:ID
+DELETE = DELETE =FIND DATA IN URL PARAMS = /STUDENTS/:ID
+
+REST API is a standard for making APIs.
+We have to consider a resource which we want to access - like Product
+We access Product using combination of HTTP method and URL style
+REST API ( CRUD - Create , Read , Update, Delete) :
+
+CREATE
+
+POST /products - create a new resource (product)
+READ
+
+GET /products - read many resources (products)
+GET /products/:id - read one specific resource (product)
+UPDATE
+
+PUT /products/:id - update by replacing all content of specific resource (product).
+PATCH /products/:id - update by only setting content from body of request and not replacing other parts of specific resource (product).
+DELETE
+
+DELETE /products/:id - delete a specific resource (product).
+
+
+CHAPTER - 5 MVC (MODEL VIEW CONTROLLER) 
+DATA = MODEL = DATABASE WALA
+VIEW = SHOW = DATA SHOWING 
+CONTROLLER = LOGIC INTERCHANGE   
+
+FOLDER STRUCTURE 
+my-app/
+│
+├── controllers/
+│   ├── userController.js
+│
+├── middleware/
+│   ├── authMiddleware.js
+│
+├── models/
+│   ├── userModel.js
+│
+├── routes/
+│   ├── userRoutes.js
+│
+├── app.js
+├── package.json
+└── users.json
+
+CHAPTER - 6 MONGODB , MONGO SHELL CLI , MONGO ATLAS 
+
+IN NOSQL = DB SERVER -> DATABASE -> COLLECTIONS -> DOUCMENT
+IN SQL   = DB SERVER -> DATABASE -> TABLES      -> TUPLES(ROW)
+DB SERVER -> UNIVERSITY -> STUDENTS , COURSES , TEACHER -> RECORDS OF STUDENTS 
+Hostname is Database server address 
+Mongodump command is used to take backup of complete database or some collections
+mongodump  --db accounts 
+Mongorestore command is used to restore database
+mongorestore --db accounts dump/accounts
+
+
+
+INSIDE DOUCMENTS -> JSON TYPE STRUCTURE -> BSON 
+{
+  OBJECT ID : PRIMARY KEY 
+  NAME : 
+  AGE : 
+  COURSE : 
+}
+
+TO CREATE DATABASE    : use <db_name> 
+TO EXIT FROM DATABASE : exit()
+
+TO CREATE COLLECTIONS : db.products.insertOne({"title":"hello", "age":15})
+			db.products.insertMany([])
+
+TO READ DOCUMENTS     : db.products.find() => result in array
+			db.product.findOne({<name_of_the_thing>}) => result in object
+
+SORT                  : ASC = 1 , DESC = -1			
+COUNT 		      : db.products.countDocuments({}) 
+
+PROJECTION 	      : MEANS KE MERKO PURA DATA NHI CHHAIYE MERKO SIRF TITLE CHHAIYE TO 			USKO PROJECTION BOLTE H ( KOI KOI PARTICULAR CHHZE HI CHHIAYE ) 
+			db.product.find({"price":{$gt:600}} , {"title":1})
+			1 = true ki haa ye chaiye , 0 = false naa ye nhi chaiye
+
+UPDATE                : update m kasia hote h agar value hoti to field ki to vo update hota 			agar field hi nhi hoti to new field ban jati kyuki sql nhi jo error  			aaye direct new field hi create ho jaati h
+
+			db.products.updateOne({"id":1},{$set{"price":9999}})
+
+			ismai third field hoti h upsert ki matlab update + insert jismai     			kyaa hota h ki agar value h to update kaaro nhi h to insert kaaro
+			
+			db.products.updateOne({"id":1},{$set{"price":9999},{upsert:1})
+
+			updateMany bhi hota h 
+			
+			replaceOne  
+			hota h usmai kasie ki pura field remove karke jo replace m 				field hogyi vo rakhega
+			
+DELETE                 :  DELETEONE , DELETEMANY
+
+MONGODB ATLAS          : YE KUCH NHI H MONGODB JO CLOUD P H MATLAB MONGODB KA DATABASE JO 			 CLOUD P H USKO MONGODB ATLAS BOLTE H 
+			 MongoDB Atlas is a fully-managed cloud database that handles all 			 the complexity of deploying, managing, and healing your 				 deployments on the cloud service provider of your choice (AWS , 			 Azure, and GCP)
+
+HOW TO CREATE DOTENV IN NODE JS 
+Install dotenv              => npm install dotenv
+create a .env File          => PORT=3000
+		     	       DATABASE_URL=mongodb://localhost:27017/mydatabase
+Load Environment Variables  => require('dotenv').config();
+Using Environment Variables => const port = process.env.PORT;
+			       const dbUrl = process.env.DATABASE_URL;
+			       const secretKey = process.env.SECRET_KEY;
+
+			       console.log(`App running on port: ${port}`);
+			       console.log(`Database URL: ${dbUrl}`);
+			       console.log(`Secret Key: ${secretKey}`);
+
+
+CHAPTER - 7 MONGOOSE SCHEMA MODEL AND CRUD OPERATIONS 
+MONGOOSE  : EK JAVASCRIPT KI LIBRARY H YE JON NODE JS M INSTALL HOTA H AUR YE HELP KARTA H 	    KI HUM DIRECT MONGODB SE NA INTERACT KAARE ISMAI KAARE COMMAND RUN
+	    MONGOOSE OBJECT MODELING H FOR NODE.JS
+
+You can install mongoose using npm :
+
+npm install mongoose
+After installing , you can import mongoose to your project :
+
+const mongoose = require("mongoose");
+Connection to Database
+To connect mongoose to your database test, you have to use the following commands :
+
+var mongoose = require('mongoose');
+await mongoose.connect('mongodb://127.0.0.1:27017/test');
+
+Schema
+Schema is the specification according to which data object is created in Database.
+
+taskSchema which contains title, status, date fields. So every task object saved in database will have these 3 fields according to Schema given
+
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const taskSchema = new Schema({
+    title:  String,
+    status: Boolean,
+    date: { type: Date, default: Date.now }    
+  });
+Many types of data are allowed in Mongoose Schema. The common SchemaTypes are:
+
+String
+Number
+Date
+Boolean
+Mixed
+ObjectId
+Array
+You can put a lot of conditions inside the Schema object :
+
+    age: { type: Number, default:18, min: 18, max: 65, required :true }
+
+Model
+Model are similar to classes, they create a Class from Schema. These classes(i.e Models) can be used to create each new database object.
+
+const mongoose = require('mongoose');
+const { Schema } =  mongoose;
+
+const taskSchema = new Schema({
+    title:  String,
+    status: Boolean,
+    date: { type: Date, default: Date.now },    
+  });
+  
+const Task = mongoose.model('Task', taskSchema); 
+
+CHAPTER-8 MERN CONNECTING WITH API
+
+CORS Issues :
+
+CORS - Cross-Origin Resource Sharing (CORS) is a standard that allows a server to relax the same-origin policy
+
+we will use CORS package to allow cross origin request from React JS server to NodeJS server as they are on different hosts.
+npm install cors
+to use cors -
+const cors = require('cors');
+
+server.use(cors())
+
+CHAPTER - 9 DEPLOY LIVE 
+VERCEL AND RAILWAY
+
+CHAPTER - 11 AUTHENTICATION USING JWT
+A JSON web token(JWT) is JSON Object which is used to securely transfer information over the web(between two parties). It can be used for an authentication system and can also be used for information exchange. The token is mainly composed of header, payload, signature. These three parts are separated by dots(.).
+
+npm install jsonwebtoken
